@@ -1,72 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:start/guard/profile.dart';
-import 'package:start/src/dicelib/dice_roller.dart';
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+import 'dicelib/multi_launcher.dart';
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-
-
-  List<bool> _isSelected = [false, false, false];
-  DiceRoller redDice = DiceRoller(diceColor: Colors.red, displayBtn: true,);
-  DiceRoller yellowDice = DiceRoller(diceColor: Colors.yellow, displayBtn: true,);
-  DiceRoller purpleDice = DiceRoller(diceColor: Colors.purple, displayBtn: true,);
-
-  void _launchDice() {
-    if (_isSelected[0]) {
-//      redDice.launchRoll(context);
-    }
-    if (_isSelected[1]) {
-      //yellowDice.launchRoll(context);
-    }
-    if (_isSelected[2]) {
-      //purpleDice.launchRoll(context);
-    }
-  }
+class HomePage extends StatelessWidget {
+  const HomePage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(Icons.person),
-            onPressed: () {
-              Navigator.pushNamed(context, '/profile');
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              signOutMethod(context);
-            },
-          ),
-        ],
-        automaticallyImplyLeading: false,
+        title: Text('Dice Roller App'),
       ),
-      //TODO change for your content 
-      body:  Column(
-        children: [
-          Row(
-            children: [
-              SizedBox(height: 20),
-              redDice,
-              SizedBox(height: 20),
-              yellowDice,
-              SizedBox(height: 20),
-              purpleDice,              
-            ],
-          ),
-         /* ElevatedButton(
-            onPressed: _launchDice,
-            child: Text("Roll Selected Dice"),
-          ),*/
-        ],
+      body: Center(
+        child: ElevatedButton(
+          child: Text('Lancer les dés'),
+          onPressed: () => _showMultiDiceDialog(context),
+        ),
       ),
+    );
+  }
+
+  void _showMultiDiceDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            width: MediaQuery.of(context).size.width *
+                0.8, // 80% de la largeur de l'écran
+            height: MediaQuery.of(context).size.height *
+                0.8, // 80% de la hauteur de l'écran
+            child: MultiDice(
+              diceColors: [
+                Colors.red,
+                Colors.yellow,
+                Colors.green,
+                Colors.purple,
+                Colors.grey.shade300,
+                Colors.grey.shade300,
+                Colors.grey.shade300,
+                Colors.grey.shade300
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
