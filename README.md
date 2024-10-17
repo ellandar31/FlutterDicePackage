@@ -1,9 +1,8 @@
 <div align="center">
-<img src="doc/images/modal_view.png" alt="Mon logo" width="200"/>
-![](doc/images/modal_view.PNG)
+<img src="doc/images/modal_view.png" alt="Mon logo" width="1000"/>
 </div>
 
-# Dice 
+# FlutterDicePackage 
 > Package for Dice display and launch 
 
 [![language](https://img.shields.io/badge/language-flutter-blue)](#)
