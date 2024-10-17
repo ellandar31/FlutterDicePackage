@@ -1,0 +1,48 @@
+name: Flutter CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+    # 1. Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # 2. Set up Flutter
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: 'stable'
+
+    # 3. Install dependencies
+    - name: Install dependencies
+      run: flutter pub get
+
+    # 4. Run Flutter tests
+    - name: Run tests
+      run: flutter test
+
+    # 5. Flutter Analyse code 
+    - name: Analyze code
+      run: flutter analyze
+
+    # 6. Flutter build Web 
+    - name: Build Android
+      run: flutter build web
+
+    # 7. Flutter build Android 
+    #- name: Build Android
+    #  run: flutter build apk --release
+
