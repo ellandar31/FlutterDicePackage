@@ -1,26 +1,33 @@
-name: start
-description: "A new Flutter project."
-publish_to: 'none'
-version: 0.1.0
+name: FlutterDiceLibrary
+description: Library for Dice manipulation
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+repository : https://github.com/ellandar31/FlutterDicePackage
+screenshots:
+  - description: 'This screenshot shows a dialog view of the dices.'
+    path: doc/images/modal_view.png
+  - description: 'This screenshot shows the result view of a roll.'
+    path: doc/images/result_view.png
+
+version: 0.0.1
 
 environment:
-  sdk: ^3.4.3
+  sdk: '>=2.18.2'
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-  provider: ^6.1.2  
   flutter_svg: ^2.0.4
-  english_words: ^4.0.0
+  cupertino_icons: ^1.0.2
+  flutter_hooks:
+  riverpod: ^2.0.0
+  hooks_riverpod: ^2.0.0
+  uuid: ^3.0.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/images/
-    - assets/default/
+

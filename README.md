@@ -1,27 +1,88 @@
+<div align="center">
+<img src="doc/images/modal_view.png" alt="Mon logo" width="200"/>
+![](doc/images/modal_view.PNG)
+</div>
 
-# Project Title
+# Dice 
+> Package for Dice display and launch 
 
-Ce repository permet d'initialiser un projet Flutter/Firebase avec une page d'authentification et une page de profil
+[![language](https://img.shields.io/badge/language-flutter-blue)](#)
+[![GitHub release](https://img.shields.io/github/v/release/ellandar31/FlutterDicePackage)](#)
+[![GitHub release date](https://img.shields.io/github/release-date/ellandar31/FlutterDicePackage)](#)
+[![GitHub last commit](https://img.shields.io/github/last-commit/ellandar31/FlutterDicePackage)](#)
+[![Free](https://img.shields.io/badge/free_for_non_commercial_use-brightgreen)](#-license)
 
-# Utilisation du template
+⭐ Star us on GitHub — it motivates us a lot!
 
-## Configuration des comptes Firebase
+## Table of Contents
+- [About](#-about)
+- [How to Build](#-how-to-build)
+- [License](#-license)
 
-#### Config.dart
 
-Récupérer les identifiants à partir de la console Firebase (google client Id)
+## 🚀 About
 
-#### firebase.json
+The current package allows to include a Widget containing Dice (with given color) and to roll them. 
+A specific Widget allow to display the result with a minimal form (number and colored cube). 
+![dialog view](doc/images/result_view.png)
 
-Mettre à jour ou générer avec flutterfire init et flutterfire configure
-dans le cas d'un hosting: utiliser build/web comme répertoire de génération
+Two ways of using the Widget are present : direct inclusion or inclusion with a button oppening a dialog box. 
+![Result](doc/images/modal_view.png)
 
-#### google-services.json
+The state is manager by Rivertop. 
 
-Mettre à jour ou générer avec flutterfire init et flutterfire configure
 
-## Configuration du contenu
 
-#### home.dart
+## 📝 How to include
 
-Vous pouvez rajouter des boutons dans la barre de menu et changer la page de contenu (default_content.dart)
+After adding the dependency :
+
+```dart
+import 'package:FlutterDiceLibrary/dice_package.dart';
+
+   [...]
+   Column(
+      children: [
+        ModalDiceLauncher(diceColors : [Colors.red, Colors.yellow, Colors.purple,  Colors.grey]), //inclusion via modal view
+        DicesResult(), // display of result in minimal format 
+      ]
+   )
+   [...]
+
+```
+
+Don't forget to include the riverpod ProviderScope on your App (runApp)
+
+```dart
+
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+void main() {
+  runApp(const ProviderScope(child: MyApp())); // nécessaire pour l'utilisation de riverpod dans la gestion des états
+}
+```
+
+## Release History
+
+* 0.0.1
+    * Work in progress
+
+## Meta
+
+Ellandar31
+[https://github.com/ellandar31/FlutterDicePackage](https://github.com/ellandar31/FlutterDicePackage/)
+
+## Contributing
+
+1. Fork it (<https://github.com/ellandar31/FlutterDicePackage/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+
+## 📃 License
+
+This product is distributed under an MIT license. See ``LICENSE.md`` for more information.
+For non-commercial use, this product is available for free.
+
+[Back to top](#top)
