@@ -1,12 +1,13 @@
-
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:FlutterDiceLibrary/dice_package.dart';
+import 'package:get/get.dart';
 
 
 void main() {
-  runApp(const ProviderScope(child: MyApp())); // nécessaire pour l'utilisation de riverpod dans la gestion des états
+  Get.put(DiceController());//obligatoire pour initialiser le controller
+  // Utiliser GetMaterialApp à la place de MaterialApp pour GetX
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,8 +15,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return const MaterialApp(
+    return GetMaterialApp( //obligatoire dans le cas d'une application avec GetX
       home: Scaffold(
         body: Home(),
       ),
@@ -23,22 +23,24 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// Exemple d'inclusion en version modale
+// Exemple d'inclusion en version modale
 class Home extends StatelessWidget {
-  
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Color> diceColors = [Colors.red,
-                                  Colors.yellow,
-                                  Colors.purple, 
-                                  Colors.grey];
+    List<Color> diceColors = [
+      Colors.red,
+      Colors.yellow,
+      Colors.purple,
+      Colors.grey,
+    ];
 
     return Column(
       children: [
-        ModalDiceLauncher(diceColors : diceColors),
-        DicesResult(),
-      ]);    
+        ModalDiceLauncher(diceColors: diceColors), // Widget modifié pour GetX
+        DicesResult(), // Affichage des résultats
+      ],
+    );
   }
 }
