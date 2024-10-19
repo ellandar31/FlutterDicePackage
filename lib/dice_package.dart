@@ -1,4 +1,4 @@
-library FlutterDiceLibrary;
+library flutter_dice;
 
 // Classes utilisables de l'extérieur
 export 'dice_controller.dart'; // classe gérant le statut des dés (Controller GetX)

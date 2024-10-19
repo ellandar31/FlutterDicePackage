@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:FlutterDiceLibrary/dice_package.dart';
+import 'package:flutter_dice/dice_package.dart';
 import 'package:get/get.dart';
 
 
