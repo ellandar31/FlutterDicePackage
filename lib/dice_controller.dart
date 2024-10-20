@@ -8,8 +8,9 @@ import 'package:get/get.dart';
 import 'src/dice_state.dart';
 
 class DiceController extends GetxController {
-  var dices = <DiceState>[].obs; // Liste observable de dés
+  var dices = <DiceState>[].obs; /// Liste observable de dés
   Random random = Random();
+  var dealer = RxBool(false); /// indique si le lancé est faite par le joueur courant
 
   /// Ajouter un dé avec une couleur spécifique
   void addDice(Color color) {
@@ -18,6 +19,7 @@ class DiceController extends GetxController {
 
   /// Initialiser plusieurs dés avec une liste de couleurs
   void initDices(List<Color> colors) {
+    dealer.value = true;
     dices.value = colors.map((color) => DiceState.initial(color)).toList();
   }
 
@@ -69,6 +71,23 @@ class DiceController extends GetxController {
     }
   }
 
+  void setResult(List<DiceState> dicesArg){
+    //test si la liste à le même taille 
+    if (dicesArg.length != dices.length){
+      return; //erreur d'actualisation 
+    }
+    dealer.value = false;
+    for(int index=0; index < dicesArg.length; index ++){
+       dices[index] = DiceState(
+          isSelected: dicesArg[index].isSelected,
+          curColor: dicesArg[index].curColor,
+          number: dicesArg[index].number,
+          currentRotation: 0,
+          rolling: false,
+        );
+    }
+  }
+
   /// Sélectionner/Désélectionner un dé
   void toggleSelection(int index) {
     if (index < 0 || index >= dices.length) return;
@@ -82,4 +101,5 @@ class DiceController extends GetxController {
       rolling: true,
     );
   }
+
 }

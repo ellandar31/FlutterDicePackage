@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../lib/dice_package.dart';
 
-import 'package:flutter_dice/dice_package.dart';
 import 'package:get/get.dart';
 
 
@@ -39,7 +39,7 @@ class Home extends StatelessWidget {
     return Column(
       children: [
         ModalDiceLauncher(diceColors: diceColors), // Widget modifié pour GetX
-        DicesResult(), // Affichage des résultats
+        const DicesResult(), // Affichage des résultats
       ],
     );
   }
