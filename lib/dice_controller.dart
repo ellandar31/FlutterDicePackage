@@ -107,7 +107,7 @@ class DiceController extends GetxController {
   List<DiceResult> getResult(){
     List<DiceResult> result = [];
     for (int index = 0; index < dices.length; index++) {
-      if(dices[index].isSelected){
+      if(dices[index].isSelected && !dices[index].rolling){
         result.add(DiceResult(curColor: dices[index].curColor, number: dices[index].number));
       }
     }
