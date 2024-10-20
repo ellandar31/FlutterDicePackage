@@ -71,21 +71,47 @@ class DiceController extends GetxController {
     }
   }
 
-  void setResult(List<DiceState> dicesArg){
-    //test si la liste à le même taille 
-    if (dicesArg.length != dices.length){
-      return; //erreur d'actualisation 
+  void setResult(List<DiceResult> dicesArg) {
+    // Test si la liste des dés d'arguments est plus grande que la liste de dés d'origine
+    if (dicesArg.isEmpty || dicesArg.length > dices.length) {
+      return; // Erreur d'actualisation ou désynchro
     }
+    
     dealer.value = false;
-    for(int index=0; index < dicesArg.length; index ++){
-       dices[index] = DiceState(
-          isSelected: dicesArg[index].isSelected,
-          curColor: dicesArg[index].curColor,
-          number: dicesArg[index].number,
+
+    // Créer une copie de dicesArg pour le parcourir
+    List<DiceResult> remainingDiceArgs = List.from(dicesArg);
+
+    for (int index = 0; index < dices.length; index++) {
+      // Trouver la première couleur dans diceArgs qui correspond au dé courant
+      int matchingIndex = remainingDiceArgs.indexWhere(
+        (diceArg) => diceArg.curColor == dices[index].curColor,
+      );
+      
+      if (matchingIndex != -1) {
+        // Mettre à jour le dé correspondant
+        dices[index] = DiceState(
+          isSelected: true,
+          curColor: remainingDiceArgs[matchingIndex].curColor,
+          number: remainingDiceArgs[matchingIndex].number,
           currentRotation: 0,
           rolling: false,
         );
+        // Supprimer cette valeur de la liste restante pour ne pas la réutiliser
+        remainingDiceArgs.removeAt(matchingIndex);
+      }
     }
+  }
+
+  /// retourne le résultat du lancé
+  List<DiceResult> getResult(){
+    List<DiceResult> result = [];
+    for (int index = 0; index < dices.length; index++) {
+      if(dices[index].isSelected){
+        result.add(DiceResult(curColor: dices[index].curColor, number: dices[index].number));
+      }
+    }
+    return result; 
   }
 
   /// Sélectionner/Désélectionner un dé
@@ -102,4 +128,12 @@ class DiceController extends GetxController {
     );
   }
 
+}
+
+/// classe permettant de manipuler les résultats d'un lancé
+class DiceResult {
+  final Color curColor; 
+  final int number;
+
+  DiceResult({required this.curColor, required this.number});
 }
